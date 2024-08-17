@@ -1,5 +1,4 @@
-// prisma/schema.prisma
-
+// Define the SQLite datasource
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
@@ -9,6 +8,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// Define the Hashtag model
 model Hashtag {
   id              String    @id
   name            String
@@ -23,6 +23,7 @@ model Hashtag {
   trend           Trend[]
 }
 
+// Define the Trend model
 model Trend {
   id          Int      @id @default(autoincrement())
   hashtagId   String
