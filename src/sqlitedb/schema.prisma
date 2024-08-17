@@ -1,0 +1,32 @@
+// prisma/schema.prisma
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Hashtag {
+  id              String    @id
+  name            String
+  countryCode     String
+  posts           Int
+  rank            Int
+  latestTrending  Boolean
+  views           BigInt
+  isPromoted      Boolean
+  trendingType    Int
+  createdAt       DateTime
+  trend           Trend[]
+}
+
+model Trend {
+  id          Int      @id @default(autoincrement())
+  hashtagId   String
+  time        Int
+  value       Int
+  hashtag     Hashtag @relation(fields: [hashtagId], references: [id])
+}
