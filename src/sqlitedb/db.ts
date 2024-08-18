@@ -1,4 +1,5 @@
-import { PrismaClient, Hashtag as PrismaHashtag, Trend as PrismaTrend } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
+import type { Hashtag as PrismaHashtag, Trend as PrismaTrend } from '@prisma/client';
 
 // Initialize Prisma Client
 const prisma = new PrismaClient();
