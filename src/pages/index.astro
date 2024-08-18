@@ -3,10 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import CountryNav from "../components/CountryNav.astro";
 import LandingPageTable from "../components/LandingPageTable.astro";
 import Faq from "../components/Faq.astro";
-import { getAllHashtags } from "../db/client";
 
-const hashtags = await getAllHashtags();
-
+// This section no longer has direct access to hashtags.
 const faqs = [
   {
     question: "Why should I use hashtags that are trending today?",
@@ -53,11 +51,14 @@ const faqs = [
       <div class="my-6 md:my-12 max-w-[30rem] md:text-center">
         Get the full list for <CountryNav country={"xx"} />
       </div>
-    </section>
-    <section
-      class="container md:mx-auto md:flex md:flex-row md:justify-center pb-10 md:pb-20"
-    >
-      <LandingPageTable hashtags={hashtags} />
+      <div class="my-6 md:my-12 text-center">
+        <button id="fetchHashtags" class="px-4 py-2 bg-blue-500 text-white rounded">
+          Load Hashtags
+        </button>
+      </div>
+      <section id="hashtagsSection" class="container md:mx-auto md:flex md:flex-row md:justify-center pb-10 md:pb-20">
+        <!-- Hashtags will be injected here by JavaScript -->
+      </section>
     </section>
     <section
       class="container px-5 text-xl md:mx-auto md:flex md:flex-col md:items-center pb-10 md:pb-20"
@@ -100,4 +101,23 @@ const faqs = [
       </div>
     </section>
   </main>
+
+  <script type="module">
+    document.getElementById('fetchHashtags').addEventListener('click', async () => {
+      try {
+        const response = await fetch('/api/hashtags'); // Adjust the endpoint as needed
+        if (!response.ok) throw new Error('Network response was not ok');
+        const hashtags = await response.json();
+        const hashtagsSection = document.getElementById('hashtagsSection');
+
+        if (hashtagsSection) {
+          hashtagsSection.innerHTML = `
+            <LandingPageTable hashtags=${JSON.stringify(hashtags)} />
+          `;
+        }
+      } catch (error) {
+        console.error('Failed to fetch hashtags:', error);
+      }
+    });
+  </script>
 </Layout>
