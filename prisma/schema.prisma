@@ -30,5 +30,5 @@ model Trend {
   hashtagId   String
   time        Int
   value       Int
-  hashtag     Hashtag @relation(fields: [hashtagId], references: [id])
+  hashtag     Hashtag? @relation(fields: [hashtagId], references: [id])
 }
