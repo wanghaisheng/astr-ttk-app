@@ -11,7 +11,7 @@ type PointInHashtagTrend = {
 };
 
 type Hashtag = PrismaHashtag & {
-  trend: PointInHashtagTrend[];
+  trend: PrismaTrend[];
 };
 
 // Function to get hashtags for a specific country
