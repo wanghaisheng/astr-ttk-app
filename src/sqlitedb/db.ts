@@ -49,11 +49,11 @@ export async function getAllHashtags(): Promise<Hashtag[]> {
 }
 
 // Helper function to process hashtags
-function processHashtags(hashtags: PrismaHashtag[]): Hashtag[] {
+function processHashtags(hashtags: (PrismaHashtag & { trend: PrismaTrend[] })[]): Hashtag[] {
   return hashtags.map((hashtag) => ({
     ...hashtag,
     views: BigInt(hashtag.views),
-    trend: hashtag.trend.map((point: PrismaTrend) => ({
+    trend: hashtag.trend.map((point) => ({
       time: point.time,
       value: point.value * 100,
     })),
