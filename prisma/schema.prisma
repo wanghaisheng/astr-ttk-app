@@ -20,7 +20,7 @@ model Hashtag {
   isPromoted      Boolean
   trendingType    Int
   createdAt       DateTime
-  trend           Trend
+  trend   Trend[]  @relation("HashtagTrend")
 // Ensure `trend` is included
 }
 
