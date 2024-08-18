@@ -20,7 +20,7 @@ model Hashtag {
   isPromoted      Boolean
   trendingType    Int
   createdAt       DateTime
-  trend           Trend[]
+  trend: PrismaTrend[]; // Ensure `trend` is included
 }
 
 // Define the Trend model
