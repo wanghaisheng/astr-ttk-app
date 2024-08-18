@@ -60,6 +60,7 @@ function processHashtags(hashtags: (PrismaHashtag & { trend: PrismaTrend[] })[])
   }));
 }
 
+
 // Helper function to shuffle an array
 function shuffleArray(array: any[]) {
   for (let i = array.length - 1; i > 0; i--) {
